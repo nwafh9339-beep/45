@@ -3,41 +3,799 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة التدريبات العسكرية</title>
-    <link rel="stylesheet" href="style.css">
+    <title>بوابة وزارة العدل - Respect First</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. إعداد الألوان وثيم البنفسجي النيون الفخم والأسود الداكن
+           ========================================================================== */
+        :root {
+            --primary-purple: #7c3aed;
+            --dark-purple: #5b21b6;
+            --deep-black: #050505;
+            --card-bg: #0f0f12;
+            --text-gold: #fbbf24;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(124, 58, 237, 0.2);
+            --neon-green: #10b981;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: var(--text-light);
+            overflow-x: hidden;
+            padding: 20px 0;
+            background-image: radial-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        .main-wrapper {
+            width: 1280px;
+            margin: 20px auto;
+            background-color: var(--deep-black);
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(124, 58, 237, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            padding-bottom: 60px;
+        }
+
+        .content-padding {
+            padding: 40px 60px;
+        }
+
+        /* ==========================================================================
+           2. الهيدر والشعار الموحد
+           ========================================================================== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-links.right { justify-content: flex-start; }
+        .nav-links.left { justify-content: flex-end; }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary-purple); }
+
+        .central-logo {
+            flex: 0 0 80px;
+            text-align: center;
+        }
+
+        .central-logo i {
+            font-size: 35px; 
+            color: var(--primary-purple); 
+            filter: drop-shadow(0 0 8px var(--primary-purple));
+        }
+
+        .brand-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .server-title {
+            font-size: 46px;
+            font-weight: 900;
+            color: var(--text-gold);
+            margin-bottom: 5px;
+        }
+
+        .sub-brand {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           3. قسم قيادة الوزارة العليا
+           ========================================================================== */
+        .leadership-section {
+            margin-bottom: 50px;
+        }
+
+        .section-heading {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            border-right: 4px solid var(--primary-purple);
+            padding-right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .leader-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .leader-card:hover {
+            border-color: var(--primary-purple);
+            transform: translateY(-2px);
+        }
+
+        .leader-title {
+            font-size: 14px;
+            color: var(--text-gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .leader-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .leader-role-character {
+            font-size: 15px;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .leader-discord {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #a78bfa;
+            font-family: monospace;
+        }
+
+        /* ==========================================================================
+           4. شبكة أزرار الخدمات والروابط المباشرة
+           ========================================================================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .service-link-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 35px 25px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none; 
+            color: var(--text-light);
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .service-link-card:hover {
+            background: var(--primary-purple);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        .service-link-card i {
+            font-size: 36px;
+            color: var(--primary-purple);
+            margin-bottom: 15px;
+            transition: 0.3s ease;
+        }
+
+        .service-link-card:hover i {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .service-link-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .service-link-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            transition: 0.3s ease;
+        }
+
+        .service-link-card:hover p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+            margin: 50px 0;
+        }
+
+        /* ==========================================================================
+           5. قسم قائمة الأعضاء المعتمدين بالوزارة 
+           ========================================================================== */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .member-column {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .column-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-purple);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .column-title.judges { border-color: var(--primary-purple); }
+        .column-title.lawyers { border-color: var(--primary-purple); }
+        .column-title.prosecutors { border-color: var(--primary-purple); }
+
+        .member-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .member-item {
+            background: #121216;
+            padding: 14px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .member-item:hover {
+            border-color: rgba(124, 58, 237, 0.8);
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.15);
+        }
+
+        .member-main-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .member-name-txt {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .member-status {
+            font-size: 11px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--neon-green);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .member-discord-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #94a3b8;
+            align-self: flex-start;
+            font-family: monospace;
+            width: 100%;
+        }
+
+        .member-discord-tag i {
+            color: #5865F2; /* لون الديسكورد الرسمي */
+            font-size: 13px;
+        }
+
+        /* ==========================================================================
+           6. قسم إنجازات الوزارة
+           ========================================================================== */
+        .achievements-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, #0f0f12 0%, #15151c 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-purple);
+        }
+
+        .achievement-icon {
+            font-size: 30px;
+            color: var(--text-gold);
+            margin-bottom: 12px;
+        }
+
+        .achievement-number {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .achievement-txt {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ==========================================================================
+           7. قسم الهيكل التنظيمي والرتب والمناصب بالوزارة
+           ========================================================================== */
+        .ranks-section {
+            margin-top: 20px;
+        }
+
+        .ranks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category-block {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .category-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 18px;
+            border-right: 4px solid var(--primary-purple);
+            padding-right: 12px;
+        }
+
+        .rank-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px; 
+            background: #121216;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            padding: 16px 24px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .rank-row:last-child { 
+            margin-bottom: 0; 
+        }
+
+        .rank-row:hover {
+            border-color: rgba(124, 58, 237, 0.6);
+            transform: translateX(-6px);
+            background: rgba(124, 58, 237, 0.03);
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.15);
+        }
+
+        .rank-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 0 0 240px;
+        }
+
+        .rank-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .rank-badge {
+            font-size: 12px;
+            color: var(--text-gold);
+            font-weight: 600;
+        }
+
+        .rank-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .rank-row.leadership-rank {
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.04) 0%, #121216 100%);
+            border-right: 4px solid var(--text-gold);
+        }
+        
+        .rank-row.leadership-rank .rank-name { 
+            color: var(--text-gold); 
+        }
+
+        .rank-row.leadership-rank:hover {
+            border-color: var(--text-gold);
+            transform: translateX(-6px);
+            background: linear-gradient(90deg, rgba(124, 58, 237, 0.08) 0%, #16161c 100%);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo-section">
-            <div class="military-logo">
-                <div class="curved-text">
-                    <svg viewBox="0 0 500 500">
-                        <path id="curve" d="M 100,250 A 150,150 0 1,1 400,250" fill="transparent" />
-                        <text>
-                            <textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">
-                                التدريبات العسكرية
-                            </textPath>
-                        </text>
-                    </svg>
+<div class="main-wrapper">
+    <div class="navbar">
+        <ul class="nav-links right">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#leadership-anchor">قيادة الوزارة</a></li>
+            <li><a href="#services-anchor">الروابط والخدمات</a></li>
+        </ul>
+        <div class="central-logo">
+            <i class="fa-solid fa-scale-balanced"></i>
+        </div>
+        <ul class="nav-links left">
+            <li><a href="#members-anchor">أعضاء وزارة العدل</a></li>
+            <li><a href="#achievements-anchor">الإنجازات</a></li>
+            <li><a href="#ranks-anchor">الهيكل والتصنيفات</a></li>
+        </ul>
+    </div>
+    
+    <div class="content-padding">
+        <div class="brand-section">
+            <h1 class="server-title">Respect First</h1>
+            <p class="sub-brand">وزارة العدل | Ministry of Justice</p>
+        </div>
+
+        <div id="leadership-anchor" class="leadership-section">
+            <h2 class="section-heading"><i class="fa-solid fa-users-shield" style="color: var(--primary-purple);"></i> قيادة وزارة العدل العليا</h2>
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <div class="leader-title">وزير العدل</div>
+                    <div class="leader-name">نواف</div>
+                    <div class="leader-role-character">شنغل منغل</div>
+                    <div class="leader-discord"><i class="fa-brands fa-discord"></i> nawaf8203</div>
                 </div>
-                <div class="swords">
-                    <div class="sword s1"></div>
-                    <div class="sword s2"></div>
+                <div class="leader-card">
+                    <div class="leader-title">نائب وزير العدل</div>
+                    <div class="leader-name">جاسم</div>
+                    <div class="leader-role-character">مسفر انس</div>
+                    <div class="leader-discord"><i class="fa-brands fa-discord"></i> ggpy.</div>
                 </div>
-                <div class="inner-circle">R</div>
+                <div class="leader-card">
+                    <div class="leader-title">مستشار وزير العدل</div>
+                    <div class="leader-name">نجم</div>
+                    <div class="leader-role-character">احمد انس</div>
+                    <div class="leader-discord"><i class="fa-brands fa-discord"></i> 8eo7</div>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-title">مساعد مستشار وزير العدل </div>
+                    <div class="leader-name">زياد الحربي</div>
+                    <div class="leader-role-character">زياد الحربي</div>
+                    <div class="leader-discord"><i class="fa-brands fa-discord"></i> ws6.c</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+
+        <div id="services-anchor">
+            <h2 class="section-heading" style="margin-bottom: 25px;"><i class="fa-solid fa-folder-open" style="color: var(--primary-purple);"></i> الخدمات الإلكترونية والروابط الرسمية</h2>
+            
+            <div class="services-grid">
+                <a href="https://docs.google.com/spreadsheets/d/1jSlcfmeELvsK2aeQ4IxvQlRe7xIoLcnEoAi0Bol7rVY/edit?usp=sharing" target="_blank" class="service-link-card">
+                    <i class="fa-solid fa-table-list"></i>
+                    <h3>جدول وزارة العدل</h3>
+                    <p>اضغط هنا للاطلاع الفوري المباشر على بيانات وزارة العدل ، سجلات القضايا الجارية، والبيانات المحدثة للوزارة عبر Google Sheets.</p>
+                </a>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScI2gq34tAVISVYG6KpUnwq_pEGPXeAThOCXnh6mlDFS6jrSQ/viewform?usp=publish-editor" target="_blank" class="service-link-card">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <h3>رفع شكوى</h3>
+                    <p>قسم مخصص لرفع الشكاوى والبلاغات الإدارية المباشرة؛ اضغط هنا لفتح النموذج الرسمي وتوصيل تفاصيل الشكوى للقيادة العليا.</p>
+                </a>
             </div>
         </div>
 
-        <div class="content-section">
-            <h1>نظام التدريبات العسكرية</h1>
-            <p>مرحباً بك في المنصة الخاصة بالتدريبات العسكرية التقنية</p>
-            <div class="buttons">
-                <button class="btn-gold">تسجيل الدخول</button>
-                <button class="btn-outline">المزيد من المعلومات</button>
+        <div class="divider"></div>
+
+        <div id="members-anchor" style="margin-bottom: 50px;">
+            <h2 class="section-heading"><i class="fa-solid fa-user-tie" style="color: var(--primary-purple);"></i> أعضاء وزارة العدل </h2>
+            <div class="members-grid">
+                
+                <div class="member-column">
+                    <div class="column-title judges">
+                        <i class="fa-solid fa-gavel" style="color: var(--primary-purple);"></i> أسماء القضاة
+                    </div>
+                    <ul class="member-list">
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">القاضي: فلان الفلاني</span>
+                                <span class="member-status">معتمد</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> judge_discord1</div>
+                        </li>
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">القاضي: اسم القاضي الثاني</span>
+                                <span class="member-status">معتمد</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> judge_discord2</div>
+                        </li>
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">القاضي: اسم القاضي الثالث</span>
+                                <span class="member-status">معتمد</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> judge_discord3</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="member-column">
+                    <div class="column-title lawyers">
+                        <i class="fa-solid fa-scale-balanced" style="color: var(--primary-purple);"></i> أسماء المحامين
+                    </div>
+                    <ul class="member-list">
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">المحامي: اسم المحامي الأول</span>
+                                <span class="member-status">مرخص</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> lawyer_discord1</div>
+                        </li>
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">المحامي: اسم المحامي الثاني</span>
+                                <span class="member-status">مرخص</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> lawyer_discord2</div>
+                        </li>
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">المحامي: اسم المحامي الثالث</span>
+                                <span class="member-status">مرخص</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> lawyer_discord3</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="member-column">
+                    <div class="column-title prosecutors">
+                        <i class="fa-solid fa-user-shield" style="color: var(--primary-purple);"></i> أسماء المدعين
+                    </div>
+                    <ul class="member-list">
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">المدعي: اسم المدعي الأول</span>
+                                <span class="member-status">النيابة العامة</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> prosecutor_discord1</div>
+                        </li>
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">المدعي: اسم المدعي الثاني</span>
+                                <span class="member-status">النيابة العامة</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> prosecutor_discord2</div>
+                        </li>
+                        <li class="member-item">
+                            <div class="member-main-info">
+                                <span class="member-name-txt">المدعي: اسم المدعي الثالث</span>
+                                <span class="member-status">النيابة العامة</span>
+                            </div>
+                            <div class="member-discord-tag"><i class="fa-brands fa-discord"></i> prosecutor_discord3</div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
+
+        <div class="divider"></div>
+
+        <div id="achievements-anchor" style="margin-bottom: 50px;">
+            <h2 class="section-heading"><i class="fa-solid fa-trophy" style="color: var(--primary-purple);"></i> لوحة إنجازات وزارة العدل الرقمية</h2>
+            <div class="achievements-section">
+                <div class="achievement-card">
+                    <div class="achievement-icon"><i class="fa-solid fa-gavel"></i></div>
+                    <div class="achievement-number">+1</div>
+                    <div class="achievement-txt">قضية تم الفصل فيها بنجاح</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <div class="achievement-number">+0</div>
+                    <div class="achievement-txt">معاملة قانونية واستشارة منجزة</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-icon"><i class="fa-solid fa-certificate"></i></div>
+                    <div class="achievement-number">50%</div>
+                    <div class="achievement-txt">نزاهة واعتماد للأنظمة العدلية</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div id="ranks-anchor" class="ranks-section">
+            <h2 class="section-heading"><i class="fa-solid fa-id-card-clip" style="color: var(--primary-purple);"></i> الهيكل التنظيمي والرتب والمناصب بالوزارة</h2>
+            
+            <div class="ranks-container">
+                <div class="category-block">
+                    <div class="category-title">القيادة العليا لوزارة العدل</div>
+                    
+                    <div class="rank-row leadership-rank">
+                        <div class="rank-info">
+                            <span class="rank-badge">الرئاسة العليا للمنظومة القضائية</span>
+                            <div class="rank-name">وزير العدل</div>
+                        </div>
+                        <div class="rank-description">
+                            السلطة المطلقة، اعتماد القوانين، تعيين القضاة، التوقيع على الأحكام القضائية الكبرى.
+                        </div>
+                    </div> 
+
+                    <div class="rank-row leadership-rank">
+                        <div class="rank-info">
+                            <span class="rank-badge">القيادة التنفيذية والمتابعة</span>
+                            <div class="rank-name">نائب وزير العدل</div>
+                        </div>
+                        <div class="rank-description">
+                            المعاون المباشر لوزير العدل والمفوض بإدارة شؤون الوزارة الإدارية والتنفيذية، ومتابعة سير القضايا والطلبات المرفوعة، والإشراف الكامل في حال غياب السيد الوزير.
+                        </div>
+                    </div>
+
+                    <div class="rank-row leadership-rank">
+                        <div class="rank-info">
+                            <span class="rank-badge">الذراع الاستشاري والقانوني</span>
+                            <div class="rank-name">مستشار وزير العدل</div>
+                        </div>
+                        <div class="rank-description">
+                            المسؤول عن تقديم المشورة القانونية والخطط الاستراتيجية للوزير، ومراجعة القرارات التنظيمية، والمساعدة في صياغة القوانين الجديدة لضمان سير عمل الوزارة بأعلى معايير الدقة والاحترافية.
+                        </div>
+                    </div>
+                    
+                    <div class="rank-row leadership-rank">
+                        <div class="rank-info">
+                            <span class="rank-badge">الدعم الاستشارة والقانوني</span>
+                            <div class="rank-name">مساعد مستشار وزير العدل</div>
+                        </div>
+                        <div class="rank-description">
+                            المسؤول عن إعداد التقارير القضائية، أرشفة الجلسات، دعم المستشار في صياغة اللوائح.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-title">السلطة القضائية والمحاكم</div>
+                    <div class="rank-row">
+                        <div class="rank-info">
+                            <span class="rank-badge">منصب النطق بالحكم والعدالة</span>
+                            <div class="rank-name">القاضي</div>
+                        </div>
+                        <div class="rank-description">
+                            صاحب الكلمة العليا والفصل داخل قاعة المحكمة، يتولى إدارة الجلسات القضائية، مراجعة الأدلة المقدمة، وإصدار الأحكام الرسمية والنهائية بناءً على الدستور واللوائح.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <div class="category-title">النيابة العامة والدفاع القانوني</div>
+                    
+                    <div class="rank-row">
+                        <div class="rank-info">
+                            <span class="rank-badge">ممثل الحق العام والدولة</span>
+                            <div class="rank-name">المدعي العام</div>
+                        </div>
+                        <div class="rank-description">
+                            المسؤول عن تمثيل الحق العام وحق الدولة في القضايا الجنائية والأمنية، ويتولى استلاف المحاضر وصياغة لوائح الاتهام الرسمية، والمرافعة أمام القاضي لإيقاع العقوبة العادلة.
+                        </div>
+                    </div>
+
+                    <div class="rank-row">
+                        <div class="rank-info">
+                            <span class="rank-badge">حامي الحقوق والدفاع الشرعي</span>
+                            <div class="rank-name">محامي</div>
+                        </div>
+                        <div class="rank-description">
+                            الممثل القانوني المرخص للمواطنين أو العسكريين المتهمين، يتولى دراسة تفاصيل القضايا, تقديم الدفوع والأدلة التي تثبت براءة موكله، والمرافعة أمام محكمة وزارة العدل.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 
 </body>
 </html>
